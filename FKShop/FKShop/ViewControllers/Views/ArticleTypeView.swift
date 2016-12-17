@@ -35,23 +35,23 @@ class ArticleTypeView: UIView {
 		}
 		let width = GLOBLE_BOUNDS_WIDTH() / 2 - 10
 		// 创建并添加UIImageView控件
-		self.imageView = UIImageView(frame: CGRectMake(0, 40, width,
-			GLOBLE_BOUNDS_HEIGHT() * 0.3 - 50))
+		self.imageView = UIImageView(frame: CGRect(x: 0, y: 40, width: width,
+			height: GLOBLE_BOUNDS_HEIGHT() * 0.3 - 50))
 		// 设置图片保持纵横比缩放
-		self.imageView.contentMode = .ScaleAspectFit
+		self.imageView.contentMode = .scaleAspectFit
 		self.addSubview(self.imageView)
 		// 创建、并添加UILabel控件
-		self.nameLabel = UILabel(frame:CGRectMake(0, 10, width, 20))
+		self.nameLabel = UILabel(frame:CGRect(x: 0, y: 10, width: width, height: 20))
 		// 设置背景色为透明色
-		self.nameLabel.backgroundColor = UIColor.clearColor()
+		self.nameLabel.backgroundColor = UIColor.clear
 		// 设置文字的字体
-		self.nameLabel.font = UIFont.systemFontOfSize(orderSize)
+		self.nameLabel.font = UIFont.systemFont(ofSize: orderSize)
 		// 设置居中对齐
-		self.nameLabel.textAlignment = .Center
+		self.nameLabel.textAlignment = .center
 		self.addSubview(self.nameLabel)
 		// 为该控件添加边框
 		self.layer.borderWidth = 1
-		self.layer.borderColor = UIColor.grayColor().CGColor
+		self.layer.borderColor = UIColor.gray.cgColor
 	}
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")

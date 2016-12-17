@@ -27,8 +27,8 @@ class HotViewController: UIViewController, UIScrollViewDelegate,
 		let selectImage = UIImage(named:HOMEONPNG)
 		// 创建一个UITabBarItem
 		let item = UITabBarItem(title:"主页",
-			image:unselectImage!.imageWithRenderingMode(.AlwaysOriginal),
-			selectedImage:selectImage!.imageWithRenderingMode(.AlwaysOriginal))
+			image:unselectImage!.withRenderingMode(.alwaysOriginal),
+			selectedImage:selectImage!.withRenderingMode(.alwaysOriginal))
 		// 设置tag
 		item.tag = 0
 		// 将创建的UITabBarItem设置为视图控制器的TabBarItem
@@ -38,12 +38,12 @@ class HotViewController: UIViewController, UIScrollViewDelegate,
 		super.viewDidLoad()
 		/******************界面上方显示轮播的5张广告图片******************/
 		// 创建一个滚动视图
-		let scrollView = UIScrollView(frame:CGRectMake(0, 0, GLOBLE_BOUNDS_WIDTH(), scrollViewHeight))
+		let scrollView = UIScrollView(frame:CGRect(x: 0, y: 0, width: GLOBLE_BOUNDS_WIDTH(), height: scrollViewHeight))
 		// 开启分页设置
-		scrollView.pagingEnabled = true
+		scrollView.isPagingEnabled = true
 		// 设置滚动视图的contentSize为滚动视图的宽度*5，因为有5张图片
-		scrollView.contentSize = CGSizeMake(GLOBLE_BOUNDS_WIDTH()
-			* CGFloat(imageCount), scrollViewHeight)
+		scrollView.contentSize = CGSize(width: GLOBLE_BOUNDS_WIDTH()
+			* CGFloat(imageCount), height: scrollViewHeight)
 		// 设置代理
 		scrollView.delegate = self
 		// 当前视图控制器添加滚动视图
@@ -54,40 +54,40 @@ class HotViewController: UIViewController, UIScrollViewDelegate,
 			let image = FKNetworkingUtil.getImageWithURLPath(path)
 			let imageView = UIImageView(image:image)
 			// 设置UIImageView的大小和位置
-			imageView.frame = CGRectMake(GLOBLE_BOUNDS_WIDTH() * CGFloat(i),
-				0, GLOBLE_BOUNDS_WIDTH(), scrollView.frame.size.height)
+			imageView.frame = CGRect(x: GLOBLE_BOUNDS_WIDTH() * CGFloat(i),
+				y: 0, width: GLOBLE_BOUNDS_WIDTH(), height: scrollView.frame.size.height)
 			// 滚动视图添加UIImageView
 			scrollView.addSubview(imageView)
 		}
 		// 创建分页控件
 		pageControl = UIPageControl()
 		// 设置选中页的圆点颜色
-		pageControl.currentPageIndicatorTintColor = UIColor.redColor()
+		pageControl.currentPageIndicatorTintColor = UIColor.red
 		// 设置非选中页的圆点颜色
-		pageControl.pageIndicatorTintColor = UIColor.grayColor()
+		pageControl.pageIndicatorTintColor = UIColor.gray
 		// 一共显示多少页（圆点）
 		pageControl.numberOfPages = imageCount
 		// 设置分页控件的中心点,x轴为滚动视图中心，y轴为滚动视图高度的0.95
-		pageControl.center = CGPointMake(GLOBLE_BOUNDS_WIDTH() * 0.5,
-			scrollView.frame.size.height * 0.95)
+		pageControl.center = CGPoint(x: GLOBLE_BOUNDS_WIDTH() * 0.5,
+			y: scrollView.frame.size.height * 0.95)
 		// 将分页控件添加到视图上
 		self.view.addSubview(pageControl)
 		/******************界面下方显示热销商品的表格******************/
 		// 创建UITableView，其高度为屏幕高度减去上方滚动区高度、导航栏高度和状态栏高度
-		tableView = UITableView(frame:CGRectMake(0, scrollViewHeight, GLOBLE_BOUNDS_WIDTH(), GLOBLE_BOUNDS_HEIGHT()
-			- scrollViewHeight - 64 - 20), style:.Plain)
+		tableView = UITableView(frame:CGRect(x: 0, y: scrollViewHeight, width: GLOBLE_BOUNDS_WIDTH(), height: GLOBLE_BOUNDS_HEIGHT()
+			- scrollViewHeight - 64 - 20), style:.plain)
 		tableView.dataSource = self
 		// 设置行高
 		tableView.rowHeight = GLOBLE_BOUNDS_HEIGHT() * 0.3
 		// 设置分割线
-		tableView.separatorStyle = .SingleLine
+		tableView.separatorStyle = .singleLine
 		// tableview隐藏多余的分割线，tableview没有数据的时候不显示线
 		tableView.tableFooterView = UIView()
 		// 将tableView添加到视图上
 		self.view.addSubview(tableView)
 	}
 	
-	override func viewWillAppear(animated: Bool){
+	override func viewWillAppear(_ animated: Bool){
 		super.viewWillAppear(animated)
 		// 创建提示控件
 		hud = MBProgressHUD()
@@ -99,8 +99,8 @@ class HotViewController: UIViewController, UIScrollViewDelegate,
 		self.view.addSubview(hud)
 		/******************获取网络数据******************/
 		// 异步请求数据
-		FKNetworkingUtil.getArticleDataWithAsynchronous(
-			{[unowned self]array in
+		FKNetworkingUtil.getArticleData(
+			asynchronous: {[unowned self]array in
 			// 获取数据
 			self.articleArray = array as! [Article]
 			// 网络数据加载完成，删除hud控件
@@ -110,13 +110,13 @@ class HotViewController: UIViewController, UIScrollViewDelegate,
 			}, url:ARTICLE_ACTION, params:nil)
 	}
 	// UIScrollView滚动的时候调用
-	func scrollViewDidScroll(scrollView: UIScrollView) {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		// 设置pageControl的当前页，则当前页的圆点颜色会变化
 		pageControl.currentPage = Int(scrollView.contentOffset.x /
 			scrollView.frame.size.width)
 	}
 	// 返回指定分区内的表格行数
-	func tableView(tableView: UITableView,
+	func tableView(_ tableView: UITableView,
 		numberOfRowsInSection section: Int) -> Int {
 		// 热点数据最多只显示6条
 		let realCount = hotItemCount < articleArray.count ?
@@ -124,14 +124,14 @@ class HotViewController: UIViewController, UIScrollViewDelegate,
 		return realCount == 0 ? 0 : (realCount - 1) / rowCellCount + 1
 	}
 	// 返回表格内每个单元格的控件
-	func tableView(tableView: UITableView,
-		cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView,
+		cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		// 自定义UITableViewCell
-		var cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+		var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
 			as! ArticleTypeTableViewCell?
 		// 使用自定义单元格
 		if cell == nil {
-			cell = ArticleTypeTableViewCell(style:.Default,
+			cell = ArticleTypeTableViewCell(style:.default,
 				reuseIdentifier:cellID)
 		}
 		// 当前行数
@@ -172,7 +172,7 @@ class HotViewController: UIViewController, UIScrollViewDelegate,
 		return cell!
 	}
 	// 手势点击时的处理方法
-	func cellViewTapped(recognizer: UITapGestureRecognizer){
+	func cellViewTapped(_ recognizer: UITapGestureRecognizer){
 		// 获得点击的视图
 		let view = recognizer.view as! ArticleTypeView
 		// 创建商品详情视图

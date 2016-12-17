@@ -17,8 +17,8 @@ class TypeViewController: UIViewController, UITableViewDataSource{
 		let selectImage = UIImage(named: TYPEONPNG)
 		// 创建一个UITabBarItem
 		let item = UITabBarItem(title:"分类", image:unselectImage!
-			.imageWithRenderingMode(.AlwaysOriginal), selectedImage:selectImage!
-			.imageWithRenderingMode(.AlwaysOriginal))
+			.withRenderingMode(.alwaysOriginal), selectedImage:selectImage!
+			.withRenderingMode(.alwaysOriginal))
 		item.tag = 1
 		// 将创建的UITabBarItem设置为视图控制器的TabBarItem
 		self.tabBarItem = item
@@ -26,17 +26,17 @@ class TypeViewController: UIViewController, UITableViewDataSource{
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// 创建、并添加所有类别的UITableView控件
-		tableView = UITableView (frame:CGRectMake(0, 0, GLOBLE_BOUNDS_WIDTH(), GLOBLE_BOUNDS_HEIGHT() - 108), style:.Plain)
+		tableView = UITableView (frame:CGRect(x: 0, y: 0, width: GLOBLE_BOUNDS_WIDTH(), height: GLOBLE_BOUNDS_HEIGHT() - 108), style:.plain)
 		tableView.dataSource = self
 		// 设置行高
 		tableView.rowHeight = GLOBLE_BOUNDS_HEIGHT() * 0.3
 		// 设置分割线
-		tableView.separatorStyle = .SingleLine
+		tableView.separatorStyle = .singleLine
 		// 设置表格隐藏多余的分隔线，表格没有数据的时候不显示多余的分隔线
 		tableView.tableFooterView = UIView()
 		self.view.addSubview(tableView)
 	}
-	override func viewWillAppear(animated: Bool){
+	override func viewWillAppear(_ animated: Bool){
 		super.viewWillAppear(animated)
 		// 异步获取数据
 		FKNetworkingUtil.getDataWithAsynchronous(
@@ -48,20 +48,20 @@ class TypeViewController: UIViewController, UITableViewDataSource{
 		}, url:ARTICLETYPE_ACTION, params:nil, clazz:ArticleType.self)
 	}
 	// 返回指定分区内表格行的数量
-	func tableView(tableView: UITableView,
+	func tableView(_ tableView: UITableView,
 		numberOfRowsInSection section:Int) -> Int{
 		// 因为每行显示两个类型，因此需要除以rowCellCount
 		return articleTypeArray.count == 0 ? 0 :
 			(articleTypeArray.count - 1) / rowCellCount + 1
 	}
 	// 返回表格内每个单元格的控件
-	func tableView(tableView: UITableView, cellForRowAtIndexPath
-		indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt
+		indexPath: IndexPath) -> UITableViewCell {
 		// 自定义UITableViewCell
-		var cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+		var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
 			as! ArticleTypeTableViewCell?
 		if cell == nil {
-			cell = ArticleTypeTableViewCell(style:.Default,
+			cell = ArticleTypeTableViewCell(style:.default,
 											reuseIdentifier:cellID)
 		}
 		// 当前行数
@@ -103,7 +103,7 @@ class TypeViewController: UIViewController, UITableViewDataSource{
 		return cell!
 	}
 	// 手势点击时的处理方法
-	func cellViewTapped(recognizer: UITapGestureRecognizer){
+	func cellViewTapped(_ recognizer: UITapGestureRecognizer){
 		// 获得点击的控件
 		let view = recognizer.view as! ArticleTypeView
 		// 创建商品详情视图

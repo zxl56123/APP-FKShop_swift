@@ -12,7 +12,7 @@ import Foundation
 	var code: String!
 	var name: String!
 	// 根据字典中的数据设置到对应的属性中
-	func setPropertyWithAttributes(attributes: NSDictionary){
+	func setPropertyWithAttributes(_ attributes: NSDictionary){
 		self.code = attributes["code"] as! String
 		self.name = attributes["name"] as! String
 	}

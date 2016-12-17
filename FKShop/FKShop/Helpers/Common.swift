@@ -10,22 +10,22 @@ import UIKit
 
 // 全局bounds
 func GLOBLE_BOUNDS() -> CGRect {
-	return UIScreen.mainScreen().bounds
+	return UIScreen.main.bounds
 }
 // 全局宽度
 func GLOBLE_BOUNDS_WIDTH() -> CGFloat{
-	return UIScreen.mainScreen().bounds.size.width
+	return UIScreen.main.bounds.size.width
 }
 // 全局高度
 func GLOBLE_BOUNDS_HEIGHT() -> CGFloat{
-	return UIScreen.mainScreen().bounds.size.height
+	return UIScreen.main.bounds.size.height
 }
 // 获取视图的宽度
-func GET_VIEW_WIDTH(view: UIView) -> CGFloat{
+func GET_VIEW_WIDTH(_ view: UIView) -> CGFloat{
 	return view.frame.size.width
 }
 // 获取视图的高度
-func GET_VIEW_HEIGHT(view: UIView) -> CGFloat{
+func GET_VIEW_HEIGHT(_ view: UIView) -> CGFloat{
 	return view.frame.size.height
 }
 // 外网服务器地址为: "http://115.29.28.226:80/fk_ec/"

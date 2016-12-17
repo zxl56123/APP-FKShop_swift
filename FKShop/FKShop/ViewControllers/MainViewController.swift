@@ -17,7 +17,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate{
 			UIColor(red:251.0 / 255, green:56.0/255, blue:7.0/255, alpha:1)
 		// navigationBar.translucent默认为真，此时下面控件的初始坐标默认在(0,0)
 		// 将该属性设置为假时，下面控件的初始坐标默认在(0,64)
-		self.navigationController!.navigationBar.translucent = false
+		self.navigationController!.navigationBar.isTranslucent = false
 		editImage = UIImage(named:EDITPNG)
 		// 设置当前视图关联的导航项的标题
 		self.navigationItem.titleView = UIImageView(image:editImage)
@@ -26,11 +26,11 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate{
 		let rightImage = UIImage(named:MENUTOPRIGHTPNG)
 		// 这两个按钮暂时还未分配事件处理方法
 		let leftBarButtonItem = UIBarButtonItem(image:leftImage!
-			.imageWithRenderingMode(.AlwaysOriginal),
-			style:.Plain,target:self, action:nil)
+			.withRenderingMode(.alwaysOriginal),
+			style:.plain,target:self, action:nil)
 		let rightBarButtonItem =  UIBarButtonItem(image:rightImage!
-			.imageWithRenderingMode(.AlwaysOriginal),
-			style:.Plain, target:self, action:nil)
+			.withRenderingMode(.alwaysOriginal),
+			style:.plain, target:self, action:nil)
 		// 默认选择第一个视图控制器
 		self.selectedIndex = 0
 		// 设置代理
@@ -40,8 +40,8 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate{
 	}
 	
 	// 选中不同的选项卡时自动激发该方法
-	func tabBarController(tabBarController: UITabBarController,
-		didSelectViewController viewController:UIViewController){
+	func tabBarController(_ tabBarController: UITabBarController,
+		didSelect viewController:UIViewController){
 		// 根据不同的选项卡来更改导航条的标题
 		if viewController.tabBarItem.tag == 0 {
 			self.navigationItem.titleView = UIImageView(image:editImage)

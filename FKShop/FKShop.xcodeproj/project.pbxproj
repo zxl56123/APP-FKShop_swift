@@ -454,9 +454,11 @@
 					CCCB16D11D10FDC90068C6F0 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 9KXYK78MW8;
+						LastSwiftMigration = 0810;
 					};
 					CCCB16E51D10FDC90068C6F0 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0810;
 						TestTargetID = CCCB16D11D10FDC90068C6F0;
 					};
 				};
@@ -690,6 +692,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.crazyit.FKShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FKShop-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -707,6 +710,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.crazyit.FKShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "FKShop-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -718,6 +722,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.crazyit.FKShopTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FKShop.app/FKShop";
 			};
 			name = Debug;
@@ -730,6 +735,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.crazyit.FKShopTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FKShop.app/FKShop";
 			};
 			name = Release;

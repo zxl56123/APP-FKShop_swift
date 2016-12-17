@@ -17,11 +17,11 @@ class ArticleViewController: UIViewController, UITableViewDataSource,
 	var tableView : UITableView!  // 显示数据的UITableView
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.view.backgroundColor = UIColor.whiteColor()
+		self.view.backgroundColor = UIColor.white
 		self.navigationItem.titleView = FKUtils.getCustomLaber("物品分类")
 		// 创建UITableView
-		tableView = UITableView(frame:CGRectMake(0, 0,
-			GLOBLE_BOUNDS_WIDTH(), GLOBLE_BOUNDS_HEIGHT() - 84), style:.Plain)
+		tableView = UITableView(frame:CGRect(x: 0, y: 0,
+			width: GLOBLE_BOUNDS_WIDTH(), height: GLOBLE_BOUNDS_HEIGHT() - 84), style:.plain)
 		tableView.dataSource = self
 		tableView.delegate = self
 		// 设置行高
@@ -30,7 +30,7 @@ class ArticleViewController: UIViewController, UITableViewDataSource,
 		tableView.tableFooterView = UIView()
 		self.view.addSubview(tableView)
 	}
-	override func viewWillAppear(animated: Bool){
+	override func viewWillAppear(_ animated: Bool){
 		super.viewWillAppear(animated)
 		// 创建提示控件
 		hud = MBProgressHUD()
@@ -42,8 +42,8 @@ class ArticleViewController: UIViewController, UITableViewDataSource,
 		self.view.addSubview(hud)
 		let url = ARTICLE_ACTION + self.code
 		// 异步请求数据
-		FKNetworkingUtil.getArticleDataWithAsynchronous(
-			{[unowned self] array in
+		FKNetworkingUtil.getArticleData(
+			asynchronous: {[unowned self] array in
 			// 获取数据
 			self.articleArray = array as! [Article]
 			// 移除hud控件
@@ -53,18 +53,18 @@ class ArticleViewController: UIViewController, UITableViewDataSource,
 			}, url:url, params:nil)
 	}
 	// 返回各分区内包含的表格行的数量（articleArray数组有多少个元素，就显示多少个表格行）
-	func tableView(tableView: UITableView, numberOfRowsInSection
+	func tableView(_ tableView: UITableView, numberOfRowsInSection
 		section: Int) -> Int {
 		return articleArray.count == 0 ? 0 : articleArray.count
 	}
 	// 返回表格内每个单元格的控件
-	func tableView(tableView: UITableView, cellForRowAtIndexPath
-		indexPath: NSIndexPath) -> UITableViewCell {
-		var cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+	func tableView(_ tableView: UITableView, cellForRowAt
+		indexPath: IndexPath) -> UITableViewCell {
+		var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
 			as! ArticleTableViewCell?
 		// 如果cell为空，则创建自定义的ArticleTableViewCell表格行控件
 		if cell == nil {
-			cell = ArticleTableViewCell(style:.Default, reuseIdentifier:cellID)
+			cell = ArticleTableViewCell(style:.default, reuseIdentifier:cellID)
 		}
 		// 根据行号获得对应的Article对象
 		let article = articleArray[indexPath.row]
@@ -83,8 +83,8 @@ class ArticleViewController: UIViewController, UITableViewDataSource,
 		return cell!
 	}
 	// 当选中某个表格行时激发该方法
-	func tableView(tableView: UITableView,
-		didSelectRowAtIndexPath indexPath:NSIndexPath){
+	func tableView(_ tableView: UITableView,
+		didSelectRowAt indexPath:IndexPath){
 		// 获取商品信息
 		let article = articleArray[indexPath.row]
 		// 创建商品详情视图
