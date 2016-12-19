@@ -43,7 +43,7 @@ class ArticleViewController: UIViewController, UITableViewDataSource,
 		let url = ARTICLE_ACTION + self.code
 		// 异步请求数据
 		FKNetworkingUtil.getArticleData(
-			asynchronous: {[unowned self] array in
+			asynchronous: { array in
 			// 获取数据
 			self.articleArray = array as! [Article]
 			// 移除hud控件

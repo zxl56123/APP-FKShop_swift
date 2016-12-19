@@ -20,7 +20,7 @@ class LineView: UIView {
 		let points = [CGPoint(x: 0, y: 10), CGPoint(x: GLOBLE_BOUNDS_WIDTH()
 			- 20, y: 10)]
 		// 画直线
-		CGContextStrokeLineSegments(ctx, points, 2);
+		//CGContextStrokeLineSegments(ctx, points, 2);
 	}
 	// 初始化方法
 	override init(frame: CGRect){

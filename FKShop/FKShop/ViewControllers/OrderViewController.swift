@@ -260,6 +260,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITextFieldD
 		// 为NSMutableURLRequest指定请求参数
 		request.httpBody = parameter.data(using: String.Encoding.utf8)
 		// ①、向后台应用发送统一下单的POST请求
+/*
 		let task = URLSession.shared.dataTask(with: request,
 			completionHandler: {data, response, error in
 			if data != nil {
@@ -295,6 +296,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITextFieldD
 			}
 		})
 		task.resume()
+*/
 	}
 	// 用户支付成功后的处理方法
 	func onPaySuccess(){
